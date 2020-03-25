@@ -1,3 +1,3 @@
 FROM python:3
 
-RUN pip3 install -U Werkzeug pytest bson flask flask_oidc pytest_bdd flask_restplus
+RUN pip3 install -U Werkzeug pytest bson flask flask_oidc pytest_bdd flask_restplus flask_cors mongoengine 
