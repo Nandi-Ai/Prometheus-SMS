@@ -1,0 +1,11 @@
+pipeline {
+    agent any
+    stages {
+        stage('Build image') {
+            steps {
+                sh 'docker build -t "python3-unittest:Dockerfile" -f Dockerfile .'
+                sh 'docker images'
+            }
+        }
+    }
+}
