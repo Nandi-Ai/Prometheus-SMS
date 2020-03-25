@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Build image') {
             steps {
-                sh 'docker build -t "python3-unittest:Dockerfile" -f Python3-UnitTest/Dockerfile .'
+                sh 'docker build -t "python3-unittest" -f Python3-UnitTest/Dockerfile .'
                 sh 'docker images'
             }
         }
