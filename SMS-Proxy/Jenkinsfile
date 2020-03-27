@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    stages {
+        stage('Create config file') {
+            steps {
+                withCredentials([string(credentialsId: 'TeleMessage', variable: 'CONFIG')]) {
+                    sh "echo $CONFIG > SMS-Proxy/config"
+                }
+            }
+        }
+        stage('Build image') {
+            steps {
+                dir('SMS-Proxy') {
+                    sh 'docker build -t "sms-proxy:latest" -f Dockerfile .'
+                }
+            }
+        }
+        stage('Remove untagged images') {
+            steps {
+                sh "for i in `docker images | grep '^<none>' | awk '{print \$3}')`;do docker rmi \$i;done"
+                sh 'docker images'
+            }
+        }
+    }
+}
