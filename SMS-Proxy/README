@@ -1,0 +1,11 @@
+Before building image using Jenkins pipeline create credentials secret text with id TeleMessage
+Example contents as below:
+
+{
+    "username": "user",
+    "password": "pass",
+    "recipients": ["phone-numer1","phone-number2"]
+}
+
+
+Running image: docker run --shm-size=256m --detach -p 8000:8000 sms:latest
