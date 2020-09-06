@@ -1,0 +1,7 @@
+{
+    "username": "",
+    "password": "",
+    "recipients": ["phone-number1","phone-number2"],
+    "provider":"",
+    "messageTitle":""
+}
