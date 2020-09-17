@@ -6,11 +6,5 @@ pipeline {
                 sh 'docker build -t "python3-unittest" -f Python3-UnitTest/Dockerfile .'
             }
         }
-        stage('Remove untagged images') {
-            steps {
-                sh "docker rmi \$(docker images | grep '^<none>' | awk '{print \$3}')"
-                sh 'docker images'
-            }
-        }
     }
 }
