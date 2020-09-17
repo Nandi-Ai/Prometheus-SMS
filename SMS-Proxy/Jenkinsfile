@@ -15,11 +15,5 @@ pipeline {
                 }
             }
         }
-        stage('Remove untagged images') {
-            steps {
-                sh "for i in `docker images | grep '^<none>' | awk '{print \$3}')`;do docker rmi \$i;done"
-                sh 'docker images'
-            }
-        }
     }
 }
