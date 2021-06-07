@@ -19,11 +19,15 @@ SMS Proxy is a lightweight code, running in docker, which makes it easy to integ
 
 #### SMS Proxy using Python Flask
 
-This code using 3 SMS provider API's - Nexmo, Message Bird, Telemessage & World-Text.
+This webhook receiver supports the following SMS provider APIs:
+* Nexmo
+* Message Bird
+* Telemessage
+* World-Text
 
-This code integrate with Prometheus alerts API.
+It integrates with Prometheus' AlertManager API.
 
-Code settings coming from `config` file which you can define all variables you need through it.
+The `config` file allows you to define all variables needed.
 
 ### How to use
 > Docker
