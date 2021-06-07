@@ -40,6 +40,6 @@ Code settings coming from `config` file which you can define all variables you n
 
 ```
 $ curl -H "Content-type: application/json" -X POST \
-  -d '{"receiver": "team-sms", "status": "firing", "alerts": [{"status": "firing", "labels": {"alertname": "test-123"} }], "commonLabels": {"key": "value"}}' \
+  -d '{"receiver": "team-sms", "status": "firing", "alerts": [{"status": "firing", "generatorURL":"127.0.0.1", "labels": {"alertname": "test-123"} }], "commonLabels": {"key": "value"}}' \
   http://localhost:9876/alert
 ```
