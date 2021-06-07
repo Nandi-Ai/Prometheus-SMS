@@ -17,9 +17,9 @@ SMS Proxy is a lightweight code, running in docker, which makes it easy to integ
 
 ### Description
 
-####SMS Proxy using Python Flask
+#### SMS Proxy using Python Flask
 
-This code using 3 SMS provider API's - Nexmo, Message Bird & Telemessage.
+This code using 3 SMS provider API's - Nexmo, Message Bird, Telemessage & World-Text.
 
 This code integrate with Prometheus alerts API.
 
