@@ -6,6 +6,7 @@ from flask_restful import Resource, Api, reqparse
 from datetime import datetime
 import nexmo
 import messagebird
+import requests
 
 app = Flask(__name__)
 api = Api(app)
@@ -39,6 +40,15 @@ def telemessageAPI(username,password,recipient,message):
             print("%s Sent SMS to %s" % (timestamp, recipient))
 
 
+def worldTextAPI(accountID,key,recipient,message):
+    url = "https://sms.world-text.com/v2.0/sms/send"
+    response = requests.put(url, data={'id':accountID, 'key':key, 'dstaddr':recipient, 'txt':message})
+    if response.status_code == 200:
+        timestamp = datetime.now().strftime("[%Y-%m-%d %H:%M:%S %z]")
+        print("%s Sent SMS to %s" % (timestamp, recipient))
+    else: print("%s Failed to send SMS to %s" % (timestamp, recipient))
+
+
 class SMS(Resource):
 
     config = dict()
@@ -68,15 +78,17 @@ class SMS(Resource):
                     if a['status'] in 'resolved':
                         prefix = "** RECOVERY alert"
 
-                    message = urllib.parse.quote("%s - %s\nURL: %s" % (prefix, a['labels'], a['generatorURL']))
+                    message = "%s - %s\nURL: %s" % (prefix, a['labels'], a['generatorURL'])
 
                     for recipient in self.config['recipients']:
                         if self.config['provider'] == "nexmo":
-                            nexmoAPI(self.config['username'], self.config['password'],self.config['messageTitle'], recipient, message)
+                            nexmoAPI(self.config['username'], self.config['password'],self.config['messageTitle'], recipient, urllib.parse.quote(message))
                         elif self.config['provider'] == "telemessage":
-                            messageBirdAPI(self.config['username'], self.config['messageTitle'], recipient, message)
+                            messageBirdAPI(self.config['username'], self.config['messageTitle'], recipient, urllib.parse.quote(message))
                         elif self.config['provider'] == "messagebird":
-                            telemessageAPI(self.config['username'],self.config['password'], self.config['messageTitle'], recipient, message)
+                            telemessageAPI(self.config['username'],self.config['password'], self.config['messageTitle'], recipient, urllib.parse.quote(message))
+                        elif self.config['provider'] == "world-text":
+                            worldTextAPI(self.config['username'],self.config['password'], recipient, message)
 
             else:
                 print("Missing User/Key or SMS Provider")
